@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
 import SolarSystem from "./components/SolarSystem";
+import SplashCursor from "@/components/react-bits/splash-cursor/SplashCursor";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
           Learn the building blocks of the web — HTML, CSS, and JavaScript — through interactive planets, visual guides, and hands-on examples made for absolute beginners.
         </p>
       </div>
+      <SplashCursor />
     </main>
   );
 }

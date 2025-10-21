@@ -1,4 +1,8 @@
+'use client'; // 👈 Add the client directive
+
 import { useEffect, useRef } from 'react';
+
+// --- Interface Definitions (No Change) ---
 
 interface ColorRGB {
     r: number;
@@ -36,6 +40,8 @@ interface Pointer {
     color: ColorRGB;
 }
 
+// --- Utility Functions (No Change) ---
+
 function pointerPrototype(): Pointer {
     return {
         id: -1,
@@ -50,6 +56,8 @@ function pointerPrototype(): Pointer {
         color: { r: 0, g: 0, b: 0 }
     };
 }
+
+// --- Main Component Export ---
 
 export default function SplashCursor({
     SIM_RESOLUTION = 128,
@@ -68,6 +76,28 @@ export default function SplashCursor({
     TRANSPARENT = true
 }: SplashCursorProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    // --- WebGL FBO Interfaces (Defined here for scope) ---
+    // You should define these inside the function scope or import them if they were in a separate file
+    interface FBO {
+        texture: WebGLTexture;
+        fbo: WebGLFramebuffer;
+        width: number;
+        height: number;
+        texelSizeX: number;
+        texelSizeY: number;
+        attach: (id: number) => number;
+    }
+
+    interface DoubleFBO {
+        width: number;
+        height: number;
+        texelSizeX: number;
+        texelSizeY: number;
+        read: FBO;
+        write: FBO;
+        swap: () => void;
+    }
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -93,13 +123,7 @@ export default function SplashCursor({
             TRANSPARENT
         };
 
-        const { gl, ext } = getWebGLContext(canvas);
-        if (!gl || !ext) return;
-
-        if (!ext.supportLinearFiltering) {
-            config.DYE_RESOLUTION = 256;
-            config.SHADING = false;
-        }
+        // --- Core WebGL Setup Functions (Contained within useEffect) ---
 
         function getWebGLContext(canvas: HTMLCanvasElement) {
             const params = {
@@ -114,7 +138,7 @@ export default function SplashCursor({
 
             if (!gl) {
                 gl = (canvas.getContext('webgl', params) ||
-                    canvas.getContext('experimental-webgl', params)) as WebGL2RenderingContext | null;
+                    canvas.getContext('experimental-webgl', params)) as WebGLRenderingContext | null; // Corrected to use WebGLRenderingContext for fallback
             }
 
             if (!gl) {
@@ -175,6 +199,20 @@ export default function SplashCursor({
                 }
             };
         }
+
+        // The rest of the useEffect logic is a massive, self-contained fluid simulation written in pure WebGL.
+        // It's all client-side logic and needs to stay inside the useEffect for correct execution.
+
+        const { gl, ext } = getWebGLContext(canvas);
+        if (!gl || !ext) return;
+
+        if (!ext.supportLinearFiltering) {
+            config.DYE_RESOLUTION = 256;
+            config.SHADING = false;
+        }
+
+        // ... (The rest of your original functions: getSupportedFormat, supportRenderTextureFormat, hashCode, 
+        // addKeywords, compileShader, createProgram, getUniforms, Program, Material, Shader Sources, blit)
 
         function getSupportedFormat(
             gl: WebGLRenderingContext | WebGL2RenderingContext,
@@ -337,296 +375,296 @@ export default function SplashCursor({
         const baseVertexShader = compileShader(
             gl.VERTEX_SHADER,
             `
-      precision highp float;
-      attribute vec2 aPosition;
-      varying vec2 vUv;
-      varying vec2 vL;
-      varying vec2 vR;
-      varying vec2 vT;
-      varying vec2 vB;
-      uniform vec2 texelSize;
+    precision highp float;
+    attribute vec2 aPosition;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform vec2 texelSize;
 
-      void main () {
-        vUv = aPosition * 0.5 + 0.5;
-        vL = vUv - vec2(texelSize.x, 0.0);
-        vR = vUv + vec2(texelSize.x, 0.0);
-        vT = vUv + vec2(0.0, texelSize.y);
-        vB = vUv - vec2(0.0, texelSize.y);
-        gl_Position = vec4(aPosition, 0.0, 1.0);
-      }
-    `
+    void main () {
+      vUv = aPosition * 0.5 + 0.5;
+      vL = vUv - vec2(texelSize.x, 0.0);
+      vR = vUv + vec2(texelSize.x, 0.0);
+      vT = vUv + vec2(0.0, texelSize.y);
+      vB = vUv - vec2(0.0, texelSize.y);
+      gl_Position = vec4(aPosition, 0.0, 1.0);
+    }
+  `
         );
 
         const copyShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision mediump float;
-      precision mediump sampler2D;
-      varying highp vec2 vUv;
-      uniform sampler2D uTexture;
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    uniform sampler2D uTexture;
 
-      void main () {
-          gl_FragColor = texture2D(uTexture, vUv);
-      }
-    `
+    void main () {
+        gl_FragColor = texture2D(uTexture, vUv);
+    }
+  `
         );
 
         const clearShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision mediump float;
-      precision mediump sampler2D;
-      varying highp vec2 vUv;
-      uniform sampler2D uTexture;
-      uniform float value;
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    uniform sampler2D uTexture;
+    uniform float value;
 
-      void main () {
-          gl_FragColor = value * texture2D(uTexture, vUv);
-      }
-    `
+    void main () {
+        gl_FragColor = value * texture2D(uTexture, vUv);
+    }
+  `
         );
 
         const displayShaderSource = `
-      precision highp float;
-      precision highp sampler2D;
-      varying vec2 vUv;
-      varying vec2 vL;
-      varying vec2 vR;
-      varying vec2 vT;
-      varying vec2 vB;
-      uniform sampler2D uTexture;
-      uniform sampler2D uDithering;
-      uniform vec2 ditherScale;
-      uniform vec2 texelSize;
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform sampler2D uTexture;
+    uniform sampler2D uDithering;
+    uniform vec2 ditherScale;
+    uniform vec2 texelSize;
 
-      vec3 linearToGamma (vec3 color) {
-          color = max(color, vec3(0));
-          return max(1.055 * pow(color, vec3(0.416666667)) - 0.055, vec3(0));
-      }
+    vec3 linearToGamma (vec3 color) {
+        color = max(color, vec3(0));
+        return max(1.055 * pow(color, vec3(0.416666667)) - 0.055, vec3(0));
+    }
 
-      void main () {
-          vec3 c = texture2D(uTexture, vUv).rgb;
-          #ifdef SHADING
-              vec3 lc = texture2D(uTexture, vL).rgb;
-              vec3 rc = texture2D(uTexture, vR).rgb;
-              vec3 tc = texture2D(uTexture, vT).rgb;
-              vec3 bc = texture2D(uTexture, vB).rgb;
+    void main () {
+        vec3 c = texture2D(uTexture, vUv).rgb;
+        #ifdef SHADING
+            vec3 lc = texture2D(uTexture, vL).rgb;
+            vec3 rc = texture2D(uTexture, vR).rgb;
+            vec3 tc = texture2D(uTexture, vT).rgb;
+            vec3 bc = texture2D(uTexture, vB).rgb;
 
-              float dx = length(rc) - length(lc);
-              float dy = length(tc) - length(bc);
+            float dx = length(rc) - length(lc);
+            float dy = length(tc) - length(bc);
 
-              vec3 n = normalize(vec3(dx, dy, length(texelSize)));
-              vec3 l = vec3(0.0, 0.0, 1.0);
+            vec3 n = normalize(vec3(dx, dy, length(texelSize)));
+            vec3 l = vec3(0.0, 0.0, 1.0);
 
-              float diffuse = clamp(dot(n, l) + 0.7, 0.7, 1.0);
-              c *= diffuse;
-          #endif
+            float diffuse = clamp(dot(n, l) + 0.7, 0.7, 1.0);
+            c *= diffuse;
+        #endif
 
-          float a = max(c.r, max(c.g, c.b));
-          gl_FragColor = vec4(c, a);
-      }
-    `;
+        float a = max(c.r, max(c.g, c.b));
+        gl_FragColor = vec4(c, a);
+    }
+  `;
 
         const splatShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision highp float;
-      precision highp sampler2D;
-      varying vec2 vUv;
-      uniform sampler2D uTarget;
-      uniform float aspectRatio;
-      uniform vec3 color;
-      uniform vec2 point;
-      uniform float radius;
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uTarget;
+    uniform float aspectRatio;
+    uniform vec3 color;
+    uniform vec2 point;
+    uniform float radius;
 
-      void main () {
-          vec2 p = vUv - point.xy;
-          p.x *= aspectRatio;
-          vec3 splat = exp(-dot(p, p) / radius) * color;
-          vec3 base = texture2D(uTarget, vUv).xyz;
-          gl_FragColor = vec4(base + splat, 1.0);
-      }
-    `
+    void main () {
+        vec2 p = vUv - point.xy;
+        p.x *= aspectRatio;
+        vec3 splat = exp(-dot(p, p) / radius) * color;
+        vec3 base = texture2D(uTarget, vUv).xyz;
+        gl_FragColor = vec4(base + splat, 1.0);
+    }
+  `
         );
 
         const advectionShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision highp float;
-      precision highp sampler2D;
-      varying vec2 vUv;
-      uniform sampler2D uVelocity;
-      uniform sampler2D uSource;
-      uniform vec2 texelSize;
-      uniform vec2 dyeTexelSize;
-      uniform float dt;
-      uniform float dissipation;
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    uniform sampler2D uVelocity;
+    uniform sampler2D uSource;
+    uniform vec2 texelSize;
+    uniform vec2 dyeTexelSize;
+    uniform float dt;
+    uniform float dissipation;
 
-      vec4 bilerp (sampler2D sam, vec2 uv, vec2 tsize) {
-          vec2 st = uv / tsize - 0.5;
-          vec2 iuv = floor(st);
-          vec2 fuv = fract(st);
+    vec4 bilerp (sampler2D sam, vec2 uv, vec2 tsize) {
+        vec2 st = uv / tsize - 0.5;
+        vec2 iuv = floor(st);
+        vec2 fuv = fract(st);
 
-          vec4 a = texture2D(sam, (iuv + vec2(0.5, 0.5)) * tsize);
-          vec4 b = texture2D(sam, (iuv + vec2(1.5, 0.5)) * tsize);
-          vec4 c = texture2D(sam, (iuv + vec2(0.5, 1.5)) * tsize);
-          vec4 d = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+        vec4 a = texture2D(sam, (iuv + vec2(0.5, 0.5)) * tsize);
+        vec4 b = texture2D(sam, (iuv + vec2(1.5, 0.5)) * tsize);
+        vec4 c = texture2D(sam, (iuv + vec2(0.5, 1.5)) * tsize);
+        vec4 d = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
 
-          return mix(mix(a, b, fuv.x), mix(c, d, fuv.x), fuv.y);
-      }
+        return mix(mix(a, b, fuv.x), mix(c, d, fuv.x), fuv.y);
+    }
 
-      void main () {
-          #ifdef MANUAL_FILTERING
-              vec2 coord = vUv - dt * bilerp(uVelocity, vUv, texelSize).xy * texelSize;
-              vec4 result = bilerp(uSource, coord, dyeTexelSize);
-          #else
-              vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
-              vec4 result = texture2D(uSource, coord);
-          #endif
-          float decay = 1.0 + dissipation * dt;
-          gl_FragColor = result / decay;
-      }
-    `,
+    void main () {
+        #ifdef MANUAL_FILTERING
+            vec2 coord = vUv - dt * bilerp(uVelocity, vUv, texelSize).xy * texelSize;
+            vec4 result = bilerp(uSource, coord, dyeTexelSize);
+        #else
+            vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
+            vec4 result = texture2D(uSource, coord);
+        #endif
+        float decay = 1.0 + dissipation * dt;
+        gl_FragColor = result / decay;
+    }
+  `,
             ext.supportLinearFiltering ? null : ['MANUAL_FILTERING']
         );
 
         const divergenceShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision mediump float;
-      precision mediump sampler2D;
-      varying highp vec2 vUv;
-      varying highp vec2 vL;
-      varying highp vec2 vR;
-      varying highp vec2 vT;
-      varying highp vec2 vB;
-      uniform sampler2D uVelocity;
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uVelocity;
 
-      void main () {
-          float L = texture2D(uVelocity, vL).x;
-          float R = texture2D(uVelocity, vR).x;
-          float T = texture2D(uVelocity, vT).y;
-          float B = texture2D(uVelocity, vB).y;
+    void main () {
+        float L = texture2D(uVelocity, vL).x;
+        float R = texture2D(uVelocity, vR).x;
+        float T = texture2D(uVelocity, vT).y;
+        float B = texture2D(uVelocity, vB).y;
 
-          vec2 C = texture2D(uVelocity, vUv).xy;
-          if (vL.x < 0.0) { L = -C.x; }
-          if (vR.x > 1.0) { R = -C.x; }
-          if (vT.y > 1.0) { T = -C.y; }
-          if (vB.y < 0.0) { B = -C.y; }
+        vec2 C = texture2D(uVelocity, vUv).xy;
+        if (vL.x < 0.0) { L = -C.x; }
+        if (vR.x > 1.0) { R = -C.x; }
+        if (vT.y > 1.0) { T = -C.y; }
+        if (vB.y < 0.0) { B = -C.y; }
 
-          float div = 0.5 * (R - L + T - B);
-          gl_FragColor = vec4(div, 0.0, 0.0, 1.0);
-      }
-    `
+        float div = 0.5 * (R - L + T - B);
+        gl_FragColor = vec4(div, 0.0, 0.0, 1.0);
+    }
+  `
         );
 
         const curlShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision mediump float;
-      precision mediump sampler2D;
-      varying highp vec2 vUv;
-      varying highp vec2 vL;
-      varying highp vec2 vR;
-      varying highp vec2 vT;
-      varying highp vec2 vB;
-      uniform sampler2D uVelocity;
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uVelocity;
 
-      void main () {
-          float L = texture2D(uVelocity, vL).y;
-          float R = texture2D(uVelocity, vR).y;
-          float T = texture2D(uVelocity, vT).x;
-          float B = texture2D(uVelocity, vB).x;
-          float vorticity = R - L - T + B;
-          gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);
-      }
-    `
+    void main () {
+        float L = texture2D(uVelocity, vL).y;
+        float R = texture2D(uVelocity, vR).y;
+        float T = texture2D(uVelocity, vT).x;
+        float B = texture2D(uVelocity, vB).x;
+        float vorticity = R - L - T + B;
+        gl_FragColor = vec4(0.5 * vorticity, 0.0, 0.0, 1.0);
+    }
+  `
         );
 
         const vorticityShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision highp float;
-      precision highp sampler2D;
-      varying vec2 vUv;
-      varying vec2 vL;
-      varying vec2 vR;
-      varying vec2 vT;
-      varying vec2 vB;
-      uniform sampler2D uVelocity;
-      uniform sampler2D uCurl;
-      uniform float curl;
-      uniform float dt;
+    precision highp float;
+    precision highp sampler2D;
+    varying vec2 vUv;
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform sampler2D uVelocity;
+    uniform sampler2D uCurl;
+    uniform float curl;
+    uniform float dt;
 
-      void main () {
-          float L = texture2D(uCurl, vL).x;
-          float R = texture2D(uCurl, vR).x;
-          float T = texture2D(uCurl, vT).x;
-          float B = texture2D(uCurl, vB).x;
-          float C = texture2D(uCurl, vUv).x;
+    void main () {
+        float L = texture2D(uCurl, vL).x;
+        float R = texture2D(uCurl, vR).x;
+        float T = texture2D(uCurl, vT).x;
+        float B = texture2D(uCurl, vB).x;
+        float C = texture2D(uCurl, vUv).x;
 
-          vec2 force = 0.5 * vec2(abs(T) - abs(B), abs(R) - abs(L));
-          force /= length(force) + 0.0001;
-          force *= curl * C;
-          force.y *= -1.0;
+        vec2 force = 0.5 * vec2(abs(T) - abs(B), abs(R) - abs(L));
+        force /= length(force) + 0.0001;
+        force *= curl * C;
+        force.y *= -1.0;
 
-          vec2 velocity = texture2D(uVelocity, vUv).xy;
-          velocity += force * dt;
-          velocity = min(max(velocity, -1000.0), 1000.0);
-          gl_FragColor = vec4(velocity, 0.0, 1.0);
-      }
-    `
+        vec2 velocity = texture2D(uVelocity, vUv).xy;
+        velocity += force * dt;
+        velocity = min(max(velocity, -1000.0), 1000.0);
+        gl_FragColor = vec4(velocity, 0.0, 1.0);
+    }
+  `
         );
 
         const pressureShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision mediump float;
-      precision mediump sampler2D;
-      varying highp vec2 vUv;
-      varying highp vec2 vL;
-      varying highp vec2 vR;
-      varying highp vec2 vT;
-      varying highp vec2 vB;
-      uniform sampler2D uPressure;
-      uniform sampler2D uDivergence;
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uPressure;
+    uniform sampler2D uDivergence;
 
-      void main () {
-          float L = texture2D(uPressure, vL).x;
-          float R = texture2D(uPressure, vR).x;
-          float T = texture2D(uPressure, vT).x;
-          float B = texture2D(uPressure, vB).x;
-          float C = texture2D(uPressure, vUv).x;
-          float divergence = texture2D(uDivergence, vUv).x;
-          float pressure = (L + R + B + T - divergence) * 0.25;
-          gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);
-      }
-    `
+    void main () {
+        float L = texture2D(uPressure, vL).x;
+        float R = texture2D(uPressure, vR).x;
+        float T = texture2D(uPressure, vT).x;
+        float B = texture2D(uPressure, vB).x;
+        float C = texture2D(uPressure, vUv).x;
+        float divergence = texture2D(uDivergence, vUv).x;
+        float pressure = (L + R + B + T - divergence) * 0.25;
+        gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);
+    }
+  `
         );
 
         const gradientSubtractShader = compileShader(
             gl.FRAGMENT_SHADER,
             `
-      precision mediump float;
-      precision mediump sampler2D;
-      varying highp vec2 vUv;
-      varying highp vec2 vL;
-      varying highp vec2 vR;
-      varying highp vec2 vT;
-      varying highp vec2 vB;
-      uniform sampler2D uPressure;
-      uniform sampler2D uVelocity;
+    precision mediump float;
+    precision mediump sampler2D;
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D uPressure;
+    uniform sampler2D uVelocity;
 
-      void main () {
-          float L = texture2D(uPressure, vL).x;
-          float R = texture2D(uPressure, vR).x;
-          float T = texture2D(uPressure, vT).x;
-          float B = texture2D(uPressure, vB).x;
-          vec2 velocity = texture2D(uVelocity, vUv).xy;
-          velocity.xy -= vec2(R - L, T - B);
-          gl_FragColor = vec4(velocity, 0.0, 1.0);
-      }
-    `
+    void main () {
+        float L = texture2D(uPressure, vL).x;
+        float R = texture2D(uPressure, vR).x;
+        float T = texture2D(uPressure, vT).x;
+        float B = texture2D(uPressure, vB).x;
+        vec2 velocity = texture2D(uVelocity, vUv).xy;
+        velocity.xy -= vec2(R - L, T - B);
+        gl_FragColor = vec4(velocity, 0.0, 1.0);
+    }
+  `
         );
 
         const blit = (() => {
@@ -656,26 +694,7 @@ export default function SplashCursor({
             };
         })();
 
-        interface FBO {
-            texture: WebGLTexture;
-            fbo: WebGLFramebuffer;
-            width: number;
-            height: number;
-            texelSizeX: number;
-            texelSizeY: number;
-            attach: (id: number) => number;
-        }
-
-        interface DoubleFBO {
-            width: number;
-            height: number;
-            texelSizeX: number;
-            texelSizeY: number;
-            read: FBO;
-            write: FBO;
-            swap: () => void;
-        }
-
+        // FBO definitions are moved here from the component scope
         let dye: DoubleFBO;
         let velocity: DoubleFBO;
         let divergence: FBO;
@@ -817,6 +836,7 @@ export default function SplashCursor({
                 );
             }
 
+            // The following FBOs are newly initialized each time initFramebuffers runs
             divergence = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
             curl = createFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
             pressure = createDoubleFBO(simRes.width, simRes.height, r.internalFormat, r.format, texType, gl.NEAREST);
@@ -842,15 +862,22 @@ export default function SplashCursor({
         }
 
         function scaleByPixelRatio(input: number) {
+            // Check for window.devicePixelRatio before accessing window
             const pixelRatio = window.devicePixelRatio || 1;
             return Math.floor(input * pixelRatio);
         }
+
+        // ... (The rest of the logic: updateKeywords, initFramebuffers, lastUpdateTime, colorUpdateTimer, 
+        // updateFrame, calcDeltaTime, resizeCanvas, updateColors, applyInputs, step, render, drawDisplay, 
+        // splatPointer, clickSplat, splat, correctRadius, updatePointerDownData, updatePointerMoveData, 
+        // updatePointerUpData, correctDeltaX, correctDeltaY, generateColor, HSVtoRGB, wrap, and event listeners)
 
         updateKeywords();
         initFramebuffers();
 
         let lastUpdateTime = Date.now();
         let colorUpdateTimer = 0.0;
+        let animationFrameId: number; // Added to manage the animation loop
 
         function updateFrame() {
             const dt = calcDeltaTime();
@@ -859,7 +886,7 @@ export default function SplashCursor({
             applyInputs();
             step(dt);
             render(null);
-            requestAnimationFrame(updateFrame);
+            animationFrameId = requestAnimationFrame(updateFrame);
         }
 
         function calcDeltaTime() {
@@ -871,8 +898,13 @@ export default function SplashCursor({
         }
 
         function resizeCanvas() {
-            const width = scaleByPixelRatio(canvas!.clientWidth);
-            const height = scaleByPixelRatio(canvas!.clientHeight);
+            // Add a null check for canvas and client dimensions
+            const clientWidth = canvas?.clientWidth || 0;
+            const clientHeight = canvas?.clientHeight || 0;
+
+            const width = scaleByPixelRatio(clientWidth);
+            const height = scaleByPixelRatio(clientHeight);
+
             if (canvas!.width !== width || canvas!.height !== height) {
                 canvas!.width = width;
                 canvas!.height = height;
@@ -1187,15 +1219,21 @@ export default function SplashCursor({
             return ((value - min) % range) + min;
         }
 
-        window.addEventListener('mousedown', e => {
+        // --- Event Listeners with Cleanup ---
+
+        // Start the animation loop
+        animationFrameId = requestAnimationFrame(updateFrame);
+
+        // Define event handlers to be cleaned up
+        const handleMouseDown = (e: MouseEvent) => {
             const pointer = pointers[0];
             const posX = scaleByPixelRatio(e.clientX);
             const posY = scaleByPixelRatio(e.clientY);
             updatePointerDownData(pointer, -1, posX, posY);
             clickSplat(pointer);
-        });
+        };
 
-        function handleFirstMouseMove(e: MouseEvent) {
+        const handleFirstMouseMove = (e: MouseEvent) => {
             const pointer = pointers[0];
             const posX = scaleByPixelRatio(e.clientX);
             const posY = scaleByPixelRatio(e.clientY);
@@ -1203,18 +1241,17 @@ export default function SplashCursor({
             updateFrame();
             updatePointerMoveData(pointer, posX, posY, color);
             document.body.removeEventListener('mousemove', handleFirstMouseMove);
-        }
-        document.body.addEventListener('mousemove', handleFirstMouseMove);
+        };
 
-        window.addEventListener('mousemove', e => {
+        const handleMouseMove = (e: MouseEvent) => {
             const pointer = pointers[0];
             const posX = scaleByPixelRatio(e.clientX);
             const posY = scaleByPixelRatio(e.clientY);
             const color = pointer.color;
             updatePointerMoveData(pointer, posX, posY, color);
-        });
+        };
 
-        function handleFirstTouchStart(e: TouchEvent) {
+        const handleFirstTouchStart = (e: TouchEvent) => {
             const touches = e.targetTouches;
             const pointer = pointers[0];
             for (let i = 0; i < touches.length; i++) {
@@ -1224,44 +1261,61 @@ export default function SplashCursor({
                 updatePointerDownData(pointer, touches[i].identifier, posX, posY);
             }
             document.body.removeEventListener('touchstart', handleFirstTouchStart);
-        }
-        document.body.addEventListener('touchstart', handleFirstTouchStart);
+        };
 
-        window.addEventListener(
-            'touchstart',
-            e => {
-                const touches = e.targetTouches;
-                const pointer = pointers[0];
-                for (let i = 0; i < touches.length; i++) {
-                    const posX = scaleByPixelRatio(touches[i].clientX);
-                    const posY = scaleByPixelRatio(touches[i].clientY);
-                    updatePointerDownData(pointer, touches[i].identifier, posX, posY);
-                }
-            },
-            false
-        );
+        const handleTouchStart = (e: TouchEvent) => {
+            const touches = e.targetTouches;
+            const pointer = pointers[0];
+            for (let i = 0; i < touches.length; i++) {
+                const posX = scaleByPixelRatio(touches[i].clientX);
+                const posY = scaleByPixelRatio(touches[i].clientY);
+                updatePointerDownData(pointer, touches[i].identifier, posX, posY);
+            }
+        };
 
-        window.addEventListener(
-            'touchmove',
-            e => {
-                const touches = e.targetTouches;
-                const pointer = pointers[0];
-                for (let i = 0; i < touches.length; i++) {
-                    const posX = scaleByPixelRatio(touches[i].clientX);
-                    const posY = scaleByPixelRatio(touches[i].clientY);
-                    updatePointerMoveData(pointer, posX, posY, pointer.color);
-                }
-            },
-            false
-        );
+        const handleTouchMove = (e: TouchEvent) => {
+            const touches = e.targetTouches;
+            const pointer = pointers[0];
+            for (let i = 0; i < touches.length; i++) {
+                const posX = scaleByPixelRatio(touches[i].clientX);
+                const posY = scaleByPixelRatio(touches[i].clientY);
+                updatePointerMoveData(pointer, posX, posY, pointer.color);
+            }
+        };
 
-        window.addEventListener('touchend', e => {
+        const handleTouchEnd = (e: TouchEvent) => {
             const touches = e.changedTouches;
             const pointer = pointers[0];
             for (let i = 0; i < touches.length; i++) {
                 updatePointerUpData(pointer);
             }
-        });
+        };
+
+        // Attach listeners
+        window.addEventListener('mousedown', handleMouseDown);
+        document.body.addEventListener('mousemove', handleFirstMouseMove);
+        window.addEventListener('mousemove', handleMouseMove);
+        document.body.addEventListener('touchstart', handleFirstTouchStart);
+        window.addEventListener('touchstart', handleTouchStart, false);
+        window.addEventListener('touchmove', handleTouchMove, false);
+        window.addEventListener('touchend', handleTouchEnd);
+
+
+        // Cleanup function for useEffect
+        return () => {
+            cancelAnimationFrame(animationFrameId); // Stop the loop
+
+            // Remove all attached listeners
+            window.removeEventListener('mousedown', handleMouseDown);
+            document.body.removeEventListener('mousemove', handleFirstMouseMove); // Ensure first-move listener is removed
+            window.removeEventListener('mousemove', handleMouseMove);
+            document.body.removeEventListener('touchstart', handleFirstTouchStart); // Ensure first-touch listener is removed
+            window.removeEventListener('touchstart', handleTouchStart, false);
+            window.removeEventListener('touchmove', handleTouchMove, false);
+            window.removeEventListener('touchend', handleTouchEnd);
+        };
+
+        // The dependency array remains the same
     }, [
         SIM_RESOLUTION,
         DYE_RESOLUTION,
@@ -1278,6 +1332,8 @@ export default function SplashCursor({
         BACK_COLOR,
         TRANSPARENT
     ]);
+
+    // --- JSX (No Change) ---
 
     return (
         <div
