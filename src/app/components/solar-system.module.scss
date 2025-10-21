@@ -1,0 +1,131 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .rocketOrbit {
+        position: absolute;
+        height: 120%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        animation: rotate 36s linear infinite;
+        z-index: 1;
+
+        .rocket {
+            height: 5rem;
+            width: auto;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .solarSystem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 42rem;
+        aspect-ratio: 1;
+        border: 1px dashed white;
+        border-radius: 50%;
+        animation: rotate 120s linear infinite;
+
+        .sun {
+            height: 8rem;
+            background: radial-gradient(circle at center, #FFDA22 0%, #FF9900 70%, #E0841F 100%);
+            box-shadow: 0 0 30px #ff9615;
+        }
+
+        .planet1 {
+            background: radial-gradient(circle at center, #A0D2FF 0%, #0077B6 70%, #003B5C 100%);
+            height: 6rem;
+            left: 0;
+            transform: translateX(-50%);
+
+            .orbit1 {
+                height: 300%;
+                animation: rotate 60s linear infinite reverse;
+
+                .satellite1 {
+                    background: radial-gradient(circle at center, #FFEF9F 0%, #D4AF37 70%, #211E08 100%);
+                    height: 3rem;
+                    left: 0;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+
+        .planet2 {
+            background: radial-gradient(circle at center, #F4D35E 0%, #D8A41E 70%, #0F0D02 100%);
+            height: 5rem;
+            right: 0;
+            transform: translateX(50%);
+
+            .orbit2 {
+                height: 200%;
+                animation: rotate 20s linear infinite;
+
+                .satellite2 {
+                    background: radial-gradient(circle at center, #90EE90 0%, #3CB371 70%, #001A0F 100%);
+                    height: 1.5rem;
+                    right: 0;
+                    transform: translateX(50%);
+                }
+            }
+
+            .orbit3 {
+                height: 325%;
+                animation: rotate 40s linear infinite;
+
+                .satellite3 {
+                    background: radial-gradient(circle at center, #87CEEB 0%, #1A759F 70%, #082A3A 100%);
+                    height: 2.8rem;
+                    left: 0;
+                    transform: translateX(-50%);
+                }
+            }
+
+            .orbit4 {
+                height: 475%;
+                animation: rotate 60s linear infinite reverse;
+
+                .satellite4 {
+                    background: radial-gradient(circle at center, #B2FFFF 0%, #00CED1 70%, #001F20 100%);
+                    height: 2.1rem;
+                    top: 0;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+.circle {
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px dashed white;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

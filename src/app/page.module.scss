@@ -1,0 +1,42 @@
+.page {
+    padding: 10rem 15rem 10rem 25rem;
+    background: radial-gradient(ellipse at bottom, #050914 0%, #000000 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20rem;
+    color: white;
+
+    .txt {
+
+        .headingTxt {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+
+            .galaxyIcn {
+                height: 12rem;
+                width: auto;
+            }
+
+            h1 {
+                font-size: 6rem;
+                line-height: 1.2;
+            }
+        }
+
+        p {
+            font-size: 3rem;
+
+            &:nth-of-type(1) {
+                margin-top: 4.5rem;
+            }
+
+            &:nth-of-type(2) {
+                margin-top: 2.5rem;
+            }
+        }
+    }
+}
