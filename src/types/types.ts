@@ -1,11 +1,11 @@
 export interface ITask {
     question: string;
-    testCases: ITestCase[];
+    codeTasks: ICodeTask[];
     codeExamples: ICodeExample[];
     htmlElements: IHtmlElement[];
 }
 
-export interface ITestCase {
+export interface ICodeTask {
     title: string;
     cases: {
         input: string;
