@@ -1,0 +1,112 @@
+{
+    "shanti-html": [
+        {
+            "step": 1,
+            "name": "Arohan",
+            "image": "/images/galaxies/shanti-html/Arohan.webp",
+            "tags": [
+                "Introduction"
+            ],
+            "description": "Welcome to the world of HTML—the foundation of web development! In this section, you'll get a solid introduction to HTML and understand why it’s so important. Let's dive in and have some fun!",
+            "researchTopics": [
+                "What is HTML and its importance?",
+                "How to create an HTML file"
+            ],
+            "tasks": [],
+            "questions": [
+                "What is the purpose of HTML?",
+                "Why is HTML important for a website?",
+                "What is the file extension for an HTML file, and how do you create one?"
+            ]
+        },
+        {
+            "step": 2,
+            "name": "Vidya",
+            "image": "/images/galaxies/shanti-html/Vidya.webp",
+            "tags": [
+                "Basic structure",
+                "Tags"
+            ],
+            "description": "In this section, you'll explore some basic HTML concepts such as tags. You'll also learn about the general structure of an HTML document and the main elements commonly used inside it.",
+            "researchTopics": [
+                "Structure of a basic HTML document",
+                "Meaning of 'tag' in HTML",
+                "Purpose of 'html', 'head', and 'body' tags"
+            ],
+            "tasks": [
+                {
+                    "question": "Look at the following HTML code. Can you identify the purpose of each tag?",
+                    "testCases": [],
+                    "codeExamples": [
+                        {
+                            "title": "",
+                            "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My First HTML Page</title>\n</head>\n<body>\n\n</body>\n</html>",
+                            "output": ""
+                        }
+                    ],
+                    "htmlElements": []
+                }
+            ],
+            "questions": [
+                "What does '<!DOCTYPE html>' at the top of an HTML file mean?",
+                "What are the roles of the 'head' and 'body' and 'title' tags, and how do they differ from each other?"
+            ]
+        },
+        {
+            "step": 3,
+            "name": "Satya",
+            "image": "/images/galaxies/shanti-html/Satya.webp",
+            "tags": [
+                "SEO",
+                "Semantic and Non-Semantic Tags"
+            ],
+            "description": "When you search for something on Google, tons of websites appear on the screen in milliseconds. But have you ever wondered how Google decides which sites show up first? This section introduces SEO (Search Engine Optimization) and the concept of semantic and non-semantic tags in a website.",
+            "researchTopics": [
+                "Search Engine Optimization (SEO)",
+                "Semantic and non-semantic tags in HTML"
+            ],
+            "tasks": [],
+            "questions": [
+                "What is SEO?",
+                "How can you make your website appear higher in search results?",
+                "Can you give examples of semantic and non-semantic tags?",
+                "How do semantic tags help search engines understand a website?"
+            ]
+        },
+        {
+            "step": 4,
+            "name": "Roshni",
+            "image": "/images/galaxies/shanti-html/Roshni.webp",
+            "tags": [
+                "Working with Texts",
+                "Highlighting Texts"
+            ],
+            "description": "Texts carry a lot of information, so they should be clear, descriptive, and easy to read. Adding text to a page is simple, and there are several ways to do it. In this section, we'll focus on the most commonly used methods.",
+            "researchTopics": [
+                "How to add text to an HTML page",
+                "Adding headings using 'h' tags (h1...h6)",
+                "Adding paragraphs using the 'p' tag",
+                "Highlighting text using 'b', 'strong', 'i', 'em', and 'del' tags",
+                "How these tags affect SEO and when to use each"
+            ],
+            "tasks": [
+                {
+                    "question": "Can you recreate the following structure in HTML using the tags you have learned about?",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "",
+                            "html": "<h1>This is the heading of our page</h1><p>We can write a very long text in this paragraph. For now, we'll keep it <strong>simple</strong>. Learn how to write text in <em>italic</em> form. If you want to indicate that a part of the text is <del>unnecessary</del>, you can do that too. You can even combine styles: <strong><em><del>bold, italic, and deleted</del></em></strong>.</p>",
+                            "css": ""
+                        }
+                    ]
+                }
+            ],
+            "questions": [
+                "Can a page have more than one 'h1' tag for headings? Is that semantically correct?",
+                "Both 'b' and 'strong' make text bold, and 'i' and 'em' make text italic. What is the difference between them?"
+            ]
+        }
+    ]
+}
