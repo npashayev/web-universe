@@ -8,7 +8,7 @@ const items = [
         textColor: "black",
         links: [
             {
-                label: "Home", ariaLabel: "HTML roadmap", href: "/",
+                label: "Home", ariaLabel: "Home", href: "/",
             }
         ]
     },
@@ -18,11 +18,8 @@ const items = [
         textColor: "black",
         links: [
             {
-                label: "HTML", ariaLabel: "HTML roadmap", href: "/roadmap",
+                label: "HTML", ariaLabel: "HTML roadmap", href: "roadmap/shanti-html",
             },
-            {
-                label: "Details", ariaLabel: "Planet details", href: "/details",
-            }
         ]
     },
 ];
