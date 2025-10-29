@@ -1,0 +1,104 @@
+.page {
+    background: radial-gradient(ellipse at bottom, #050914 0%, #000000 100%);
+    min-height: 100vh;
+    padding: 12rem 10rem 5rem 10rem;
+    color: white;
+    font-size: 1.8rem;
+
+    section {
+        padding-block: 3rem;
+
+        h2 {
+            margin-bottom: 1.6rem;
+        }
+
+        p {
+            margin-block: 1.2rem;
+        }
+
+        .researchTopicList {
+            margin-left: 2rem;
+            list-style: disc;
+            list-style-position: inside;
+        }
+
+        .questionsList {
+            margin-left: 2rem;
+            list-style-position: inside;
+        }
+
+        li {
+            line-height: 1.6;
+        }
+    }
+
+    .headerSection {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5rem;
+
+        .headerText {
+            p {
+                margin-top: 1.2rem;
+            }
+        }
+
+        .planetImage {
+            height: 20rem;
+            width: auto;
+        }
+    }
+
+    .taskSection {
+        .task {
+            .htmlElementsCnr {
+                .htmlElement {
+                    .elementBox {
+                        background-color: white;
+                        resize: both;
+                        overflow: auto;
+                        padding: 2rem;
+                        color: black;
+                        width: 100%;
+                        min-height: 20rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.inputOutputCnr {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    pre {
+        border: 1px solid #1a1a1a;
+        background-color: #0d0d0d;
+        color: #e0e0e0;
+        border-radius: 2rem;
+        padding: 1.8rem 2rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: auto;
+        line-height: 1.6;
+        font-size: 1.6rem;
+
+        .copyButton {
+            display: block;
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 1.6rem;
+
+            span {
+                display: flex;
+                align-items: flex-end;
+                gap: 0.4rem;
+                line-height: 1;
+            }
+        }
+
+    }
+}
