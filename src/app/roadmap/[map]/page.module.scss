@@ -2,11 +2,11 @@
     position: relative;
     min-height: 100vh;
     z-index: 1;
-    padding-block: 16rem;
+    padding-block: 12rem;
 
-    --animation-duration-s: 150s;
-    --animation-duration-s2: 300s;
-    --animation-duration-s3: 450s;
+    --animation-duration-s: 300s;
+    --animation-duration-s2: 600s;
+    --animation-duration-s3: 900s;
 }
 
 @keyframes travel {
