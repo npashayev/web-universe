@@ -1,19 +1,37 @@
-export interface TaskCode {
-    code: string;
-    output: string
-}
-export interface TaskData {
-    task: string;
-    codeSnippets: TaskCode[];
+export interface ITask {
+    question: string;
+    testCases: ITestCase[];
+    codeExamples: ICodeExample[];
+    htmlElements: IHtmlElement[];
 }
 
-export interface PlanetData {
+export interface ITestCase {
+    title: string;
+    cases: {
+        input: string;
+        expectedOutput: string;
+    }[]
+}
+
+export interface ICodeExample {
+    title: string;
+    code: string;
+    output: string;
+}
+
+export interface IHtmlElement {
+    title: string;
+    html: string;
+    css: string;
+}
+
+export interface IPlanet {
     step: number;
     name: string;
     image: string;
-    description: string;
     tags: string[];
+    description: string;
     researchTopics: string[];
-    tasks: TaskData[];
+    tasks: ITask[];
     questions: string[];
 }
