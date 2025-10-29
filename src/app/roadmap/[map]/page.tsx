@@ -1,21 +1,21 @@
 'use client'
-import { PlanetData } from '@/types/types';
 import React, { use, useEffect, useState } from 'react';
 import styles from './page.module.scss';
 import axios from 'axios';
 import Planet from './components/Planet';
+import { IPlanet } from '@/types/types';
 
-export default function Road({ params }: { params: Promise<{ map: string }> }) {
+export default function Map({ params }: { params: Promise<{ map: string }> }) {
 
     const { map } = use(params);
-    const [planets, setPlanets] = useState<PlanetData[]>([]);
+    const [planets, setPlanets] = useState<IPlanet[]>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
         const getPlanets = async () => {
             try {
-                const res = await axios.get<PlanetData[]>(`http://localhost:5000/${map}`);
+                const res = await axios.get<IPlanet[]>(`http://localhost:5000/${map}`);
                 setPlanets(res.data);
             } catch (err) {
                 console.error(err);

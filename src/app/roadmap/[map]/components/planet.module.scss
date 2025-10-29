@@ -1,5 +1,5 @@
 .planetSection {
-    padding: 24rem 3rem;
+    padding: 22rem 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,14 +29,14 @@
 
         .outerOrbit {
             border-radius: 50%;
-            height: 125%;
+            height: 115%;
             aspect-ratio: 1;
             border: 1px dashed white;
             position: absolute;
         }
 
         .orbit {
-            height: 100%;
+            height: 90%;
             aspect-ratio: 1;
             position: absolute;
 
