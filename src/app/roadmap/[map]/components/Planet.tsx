@@ -1,17 +1,20 @@
 import Link from 'next/link';
 import styles from './planet.module.scss';
 import Image from 'next/image';
-import { PlanetData } from '@/types/types';
+import { IPlanet } from '@/types/types';
+import { usePathname } from 'next/navigation';
 
 interface PlanetProps {
-    planet: PlanetData;
+    planet: IPlanet;
 }
 
 const Planet = ({ planet }: PlanetProps) => {
+    const pathname = usePathname();
+
     return (
         <section className={styles.planetSection}>
             <div className={styles.planetCnr}>
-                <Link href={`/${planet.name}`} className={styles.link}>
+                <Link scroll={false} href={`${pathname}/${planet.name}`} className={styles.link}>
                     <Image
                         src={planet.image}
                         alt={planet.name}
@@ -30,7 +33,6 @@ const Planet = ({ planet }: PlanetProps) => {
 
                 <div className={styles.outerOrbit}></div>
 
-                {/* <button className={styles.planetHeader}>Explore {planet.name}</button> */}
             </div>
         </section>
     );
