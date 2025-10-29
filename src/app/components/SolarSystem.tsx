@@ -8,7 +8,8 @@ const SolarSystem = () => {
                 <Image
                     className={styles.rocket}
                     src="/images/rocket.png"
-                    alt='rocket' width={1024}
+                    alt='rocket'
+                    width={1024}
                     height={1024}
                 />
             </div>

@@ -9,7 +9,13 @@ export default function Home() {
       <SolarSystem />
       <div className={styles.txt}>
         <div className={styles.headingTxt}>
-          <Image src="/images/galaxy.png" alt="galaxy icon" width={512} height={512} className={styles.galaxyIcn} />
+          <Image
+            className={styles.galaxyIcn}
+            src="/images/galaxy.png"
+            alt="galaxy icon"
+            width={512}
+            height={512}
+          />
           <h1>
             Explore the Universe of Web Development
           </h1>
