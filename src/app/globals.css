@@ -12,8 +12,7 @@ body {
   font-family: var(--font-nunito), sans-serif;
 }
 
-code,
-pre {
+code {
   font-family: var(--font-fira-code), monospace;
   font-weight: 400;
 }
