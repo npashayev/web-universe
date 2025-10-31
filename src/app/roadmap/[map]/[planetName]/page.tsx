@@ -99,7 +99,7 @@ export default function Planet({ params }: { params: Promise<{ map: string, plan
                     {
                         planet.tasks.map((task, index) => (
                             <div key={index} className={styles.task}>
-                                <p className={styles.question}>{`${index + 1}. ${task.question}`}</p>
+                                <pre className={styles.question}>{`${index + 1}. ${task.question}`}</pre>
 
                                 {
                                     task.codeTasks?.length > 0 &&
