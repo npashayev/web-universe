@@ -36,7 +36,7 @@
             "tasks": [
                 {
                     "question": "Look at the following HTML code. Can you identify the purpose of each tag?",
-                    "testCases": [],
+                    "codeTasks": [],
                     "codeExamples": [
                         {
                             "title": "",
@@ -86,7 +86,7 @@
                 "How to add text to an HTML page",
                 "Adding headings using 'h' tags (h1...h6)",
                 "Adding paragraphs using the 'p' tag",
-                "Highlighting text using 'b', 'strong', 'i', 'em', and 'del' tags",
+                "Highlighting text using 'b', 'strong', 'i', 'em', 'del' and 'span' tags",
                 "How these tags affect SEO and when to use each"
             ],
             "tasks": [
@@ -106,6 +106,392 @@
             "questions": [
                 "Can a page have more than one 'h1' tag for headings? Is that semantically correct?",
                 "Both 'b' and 'strong' make text bold, and 'i' and 'em' make text italic. What is the difference between them?"
+            ]
+        },
+        {
+            "step": 5,
+            "name": "Suramya",
+            "image": "/images/galaxies/shanti-html/Suramya.webp",
+            "tags": [
+                "Developer tools",
+                "Debugging"
+            ],
+            "description": "Before learning about other HTML elements, there's an important topic you should cover first. When something goes wrong on your page, finding the issue just by reading the code can be tricky. Luckily, browsers have a built-in feature called 'Developer Tools'. When you right-click on a page, you'll usually see an option called 'Inspect' — clicking it opens a panel on the side called Developer Tools. It gives you detailed information about your page, like the HTML structure, styles applied to each element, network activity, and much more. You'll use Developer Tools a lot as a developer, so try to get comfortable with them. For now, you don’t need to learn everything — just start by inspecting HTML elements on your page using Developer Tools.",
+            "researchTopics": [
+                "What are browser Developer Tools used for?",
+                "How to open Developer Tools in different browsers (e.g. Chrome, Firefox, Edge, etc.)",
+                "What is debugging?"
+            ],
+            "tasks": [],
+            "questions": [
+                "What are Developer Tools (DevTools) used for in a browser?",
+                "How can you open DevTools in your browser? (Name at least two ways.)",
+                "What happens when you right-click an element on a webpage and choose 'Inspect'?",
+                "Why might a developer use DevTools instead of just viewing the website normally?",
+                "Do DevTools change the real website or only what’s shown on your screen?"
+            ]
+        },
+        {
+            "step": 6,
+            "name": "Dhairya",
+            "image": "/images/galaxies/shanti-html/Dhairya.webp",
+            "tags": [
+                "Attributes",
+                "id",
+                "class",
+                "title"
+            ],
+            "description": "You may have seen some additional text inside HTML tags, like <img src=\"/cat.png\" title=\"A cute cat\">. These are called attributes, and they provide the browser with extra information about the element. In this section, you'll learn what attributes are. You don’t need to memorize all their names and types — just understand why they are used and what kind of information they can provide. Specifically, focus on the 'id', 'class', and 'title' attributes, and how they help describe or identify elements on a page.",
+            "researchTopics": [
+                "Attributes in HTML",
+                "What is 'id' in an HTML element",
+                "What is 'class' in an HTML element",
+                "What is 'title' in an HTML element"
+            ],
+            "tasks": [],
+            "questions": [
+                "What is an attribute in an HTML element, and why is it used?",
+                "What kind of information can attributes provide?",
+                "What is the purpose of the 'id' attribute?",
+                "How is the 'class' attribute different from 'id'?",
+                "Can multiple elements have the same 'class'? What about 'id'?",
+                "What is the purpose of the 'title' attribute?",
+                "How can you make the title appear when you hover over an HTML element with your mouse?",
+                "What happens if you assign the same 'id' to two elements?"
+            ]
+        },
+        {
+            "step": 7,
+            "name": "Samartha",
+            "image": "/images/galaxies/shanti-html/Samartha.webp",
+            "tags": [
+                "Links in HTML",
+                "'a' tag",
+                "'nav' tag",
+                "Line Break with <br>"
+            ],
+            "description": "On most websites, you see elements that take you to a different page when clicked. We achieve this using links. The 'a' tag is used to create links. If we have a group of links, we can wrap them inside a 'nav' tag. Links will work without 'nav', but using 'nav' helps with SEO and accessibility, making it easier for search engines and screen readers to understand your website.",
+            "researchTopics": [
+                "How to create a link in HTML",
+                "Attributes for 'a' tag",
+                "Grouping links using 'nav'",
+                "What is 'br' tag and how to use it?"
+            ],
+            "tasks": [
+                {
+                    "question": "Click on the below links and see what is happening. Your task is to create a group of links using the 'nav' tag. Inside 'nav', include 3 links. Clicking on \"Google\" should open google.com in the same tab. Clicking on \"Youtube\" should open youtube.com in a new tab. The link \"This does nothing\" should not go anywhere. You can use Developer Tools to inspect the below elements and see how the tags are used. Use '<br/>' after each link to add a line break and start the next one on a new line.",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "",
+                            "html": "<nav><a href=\"https://www.google.com\">Google</a><br/><a href=\"https://www.youtube.com\" target=\"_blank\" rel=\"noopener noreferrer\">YouTube</a><br/><a href=\"#\">This does nothing</a></nav>",
+                            "css": ""
+                        }
+                    ]
+                }
+            ],
+            "questions": [
+                "How can you create a link in HTML?",
+                "What is the purpose of the 'href' attribute?",
+                "What is the difference between absolute and relative URLs?",
+                "Let's say you have two HTML documents: 'index.html' and 'article.html'. How can you create a link inside 'index.html' that opens 'article.html'?",
+                "What does \"target=\"_blank\"\" do?"
+            ]
+        },
+        {
+            "step": 8,
+            "name": "Tejas",
+            "image": "/images/galaxies/shanti-html/Tejas.webp",
+            "tags": [
+                "Adding images with 'img'",
+                "Lazy loading"
+            ],
+            "description": "In this section you will learn how to add images to your website. Using images, you can make your page more attractive and informative.",
+            "researchTopics": [
+                "How to add images to a website ('img' tag)",
+                "Using 'src', 'alt' and 'title' attributes on 'img' tag",
+                "Using 'height' and 'width' attributes in 'img'",
+                "What is lazy loading and how to apply lazy loading to images"
+            ],
+            "tasks": [
+                {
+                    "question": "In this task, you will use your knowledge about images and links. Create an HTML file and add several images following these requirements:\n1. First image: Use an external image URL from the web (we used Lionel Messi image here). Do not download it; use the external URL.\n2. Local image: Inside your project folder, create an 'images' folder, download an image there, and add it to your page.\n3. Image as a link: Create an 'a' tag and place an image inside it using an external URL (f.e. Sun image). When the user clicks it, they should be redirected to the image URL.\n4. Broken image: Add a new image with a non-existent URL.\n5. Add proper 'alt' and 'title' attributes for all images. Set the height to 200px and apply lazy loading using the 'loading' attribute. (Using both height and width simultaneously is not usually recommended as it can stretch the image).",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "",
+                            "html": "<img src=\"https://fifpro.org/media/fhmfhvkx/messi-world-cup.jpg?rxy=0.48356841796117644,0.31512414378031967&width=1600&height=1024&rnd=133210253587130000\" alt=\"Lionel Messi playing football\" title=\"Lionel Messi - The Legend\" height=\"200px\" loading=\"lazy\">\n<img src=\"/images/galaxies/shanti-html/Tejas.webp\" alt=\"Local Tejas image\" title=\"Local Tejas Image\" height=\"200px\" loading=\"lazy\">\n<a href=\"https://www.quantamagazine.org/what-is-the-sun-made-of-and-when-will-it-die-20180705/\"><img src=\"https://www.quantamagazine.org/wp-content/uploads/2018/07/SolarFull_SeanDoran_2880FullwidthLede.jpg\" alt=\"The Sun and its composition\" title=\"The Sun - Quanta Magazine\" height=\"200px\" loading=\"lazy\"></a>\n<img src=\"/images/galaxies/shanti-html/nonexistent.jpg\" alt=\"this image is not accessible\" title=\"Broken Image Example\" height=\"200px\" loading=\"lazy\">",
+                            "css": ""
+                        }
+                    ]
+                }
+            ],
+            "questions": [
+                "How can you add an image to your website?",
+                "What is the purpose of 'alt' and 'title' attributes for images?",
+                "What is lazy loading for images?",
+                "How does lazy loading improve website performance?",
+                "How do you apply lazy loading to images in HTML?"
+            ]
+        },
+        {
+            "step": 9,
+            "name": "Arya",
+            "image": "/images/galaxies/shanti-html/Arya.webp",
+            "tags": [
+                "Favicon",
+                "Tab title",
+                "Comments"
+            ],
+            "description": "Look at the currently open tab in your browser. Do you see a small icon and a text next to it? They are called favicon and title. In this section, you will learn how to add custom ones to your page. You will also learn about comments in HTML and what they are used for.",
+            "researchTopics": [
+                "Adding favicon and title to an HTML page",
+                "Comments in HTML"
+            ],
+            "tasks": [
+                {
+                    "question": "Create a new HTML document. Change the title of your page and add a favicon. Add some comments to your document and observe how they are created.",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": []
+                }
+            ],
+            "questions": [
+                "What is a favicon and why is it used?",
+                "How do you set the title of an HTML page?",
+                "How do you write comments in HTML, and why are they useful?"
+            ]
+        },
+        {
+            "step": 10,
+            "name": "Sundara",
+            "image": "/images/galaxies/shanti-html/Sundara.webp",
+            "tags": [
+                "Lists",
+                "ul",
+                "ol",
+                "li"
+            ],
+            "description": "When you go to the market, you may have created a list of products to be bought at least once. Lists help us organize items in a clear and structured way so we don’t forget anything. In HTML, we can create lists as well. We can use unordered lists, ordered lists, and even nested lists to represent hierarchical information.",
+            "researchTopics": [
+                "What are lists in HTML",
+                "Unordered lists (ul)",
+                "Ordered lists (ol)",
+                "Nested lists"
+            ],
+            "tasks": [
+                {
+                    "question": "Check the code. Why is it considered a better approach to put link groups inside lists? Using lists improves accessibility, makes your code more organized, and helps screen readers understand the structure of your navigation. Yes, it looks a bit ugly, but we will give some styles later. Additionally, you can use <h4> tags to represent headers.",
+                    "codeTasks": [],
+                    "codeExamples": [
+                        {
+                            "title": "",
+                            "code": "<ul>\n  <li>\n    <a href=\"#\">Home</a>\n  </li>\n  <li>\n    <a href=\"#\">About</a>\n  </li>\n  <li>\n    <a href=\"#\">Contact</a>\n  </li>\n</ul>",
+                            "output": ""
+                        }
+                    ],
+                    "htmlElements": []
+                },
+                {
+                    "question": "In this task you will create three lists. One will be an unordered list (products), the second will be an ordered list (students), and the last one will be a nested list (list of 3 countries in unordered form and their 3 biggest cities as a nested ordered list). Yes, it looks a bit ugly, but we will give some styles later. Additionally, you can use <h4> tags to represent headers.",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "",
+                            "html": "<h4>List of Products</h4>\n<ul>\n  <li>Apples</li>\n  <li>Bananas</li>\n  <li>Oranges</li>\n</ul>\n<h4>List of Students</h4>\n<ol>\n  <li>John</li>\n  <li>Mary</li>\n  <li>Ali</li>\n</ol>\n<h4>Countries and their Biggest Cities</h4>\n<ul>\n  <li>USA\n    <ol>\n      <li>New York</li>\n      <li>Los Angeles</li>\n      <li>Chicago</li>\n    </ol>\n  </li>\n  <li>France\n    <ol>\n      <li>Paris</li>\n      <li>Lyon</li>\n      <li>Marseille</li>\n    </ol>\n  </li>\n  <li>Japan\n    <ol>\n      <li>Tokyo</li>\n      <li>Osaka</li>\n      <li>Kyoto</li>\n    </ol>\n  </li>\n</ul>",
+                            "css": ""
+                        }
+                    ]
+                },
+                {
+                    "question": "Do you remember from the previous section where you created a 'nav' element with links inside it? Let's improve it even further. Create a 'nav' element. Instead of directly putting links inside it, put 'a' tags inside 'li' elements of an unordered list. 3 links are enough. You can set 'href' to any URL you want. Yes, it looks a bit ugly, but we will give some styles later. Additionally, you can use <h4> tags to represent headers.",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "",
+                            "html": "<h4>Navigation Links</h4>\n<nav>\n  <ul>\n    <li>\n      <a href=\"https://www.google.com\">Google</a>\n    </li>\n    <li>\n      <a href=\"https://www.linkedin.com\">Linkedin</a>\n    </li>\n    <li>\n      <a href=\"https://www.facebook.com\">Facebook</a>\n    </li>\n  </ul>\n</nav>",
+                            "css": ""
+                        }
+                    ]
+                }
+            ],
+            "questions": [
+                "What is the difference between ordered and unordered lists?",
+                "Why is it better to add link groups inside lists?",
+                "What is a nested list and when would you use it?",
+                "How does using lists improve accessibility for screen readers?"
+            ]
+        },
+        {
+            "step": 11,
+            "name": "Lalita",
+            "image": "/images/galaxies/shanti-html/Lalita.webp",
+            "tags": [
+                "'div' element",
+                "'span' element",
+                "Inline and block elements"
+            ],
+            "description": "In real projects, you’ll often need to organize related parts of your page. For example, imagine you have a heading, an image, and a short description — you can wrap them all inside a single 'div' to keep them together. The 'div' element is one of the most common tools for grouping content, letting you move, style, or manage multiple elements as one block. On the other hand, the 'span' element is used when you want to style or highlight just a small piece of text inside a paragraph, such as changing the color of one word. In this section, you’ll also learn the important difference between block and inline elements — how they behave and when to use each.",
+            "researchTopics": [
+                "'div' tag",
+                "'span' tag",
+                "Inline and block elements in HTML"
+            ],
+            "tasks": [
+                {
+                    "question": "Look at the following examples and observe how block and inline elements behave differently on the page.",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "In this example, we have a heading ('h3'), two paragraphs ('p'), and a 'div' element. Notice how each one starts on a new line and stretches across the page — this is the typical behavior of block-level elements.",
+                            "html": "<h3>This is an H3 heading</h3>\n<p>This is the first paragraph.</p>\n<p>This is the second paragraph starting from a new line, not right after the previous one.</p>\n<div>This is a 'div' element. Yes, 'div' is also a block element.</div>",
+                            "css": ""
+                        },
+                        {
+                            "title": "Here we’ve added three images. Unlike block elements, these sit side by side because images are inline elements by default. Inline elements only take up as much width as their content requires.",
+                            "html": "<img src=\"/images/galaxies/shanti-html/Lalita.webp\" alt=\"Example image\" height=\"200px\">\n<img src=\"/images/galaxies/shanti-html/Tejas.webp\" alt=\"Example image\" height=\"200px\">\n<img src=\"/images/galaxies/shanti-html/Sundara.webp\" alt=\"Example image\" height=\"200px\">",
+                            "css": ""
+                        }
+                    ]
+                }
+            ],
+            "questions": [
+                "What are the main differences between block and inline elements?",
+                "How does the 'div' element help organize page structure?",
+                "When should you use a 'span' instead of a 'div'?",
+                "Can a block element contain inline elements like 'span' or 'a'?"
+            ]
+        },
+        {
+            "step": 12,
+            "name": "Madhura",
+            "image": "/images/galaxies/shanti-html/Madhura.webp",
+            "tags": [
+                "HTML Tables"
+            ],
+            "description": "In this section, you will learn how to create tables in HTML. Tables are used to organize data in rows and columns, making it easier to read and compare information. You can add captions, headers, footers, and even merge cells to create professional-looking tables.",
+            "researchTopics": [
+                "Creating tables in HTML",
+                "Adding caption to a table",
+                "Using thead, tbody, and tfoot",
+                "Merging cells with colspan and rowspan"
+            ],
+            "tasks": [
+                {
+                    "question": "Analyze the following table code. Identify what each tag does and explain the purpose of the border='1' attribute.",
+                    "codeTasks": [],
+                    "codeExamples": [
+                        {
+                            "title": "",
+                            "code": "<table border=\"1\">\n  <caption>Sample Table</caption>\n  <thead>\n    <tr>\n      <th>Product</th>\n      <th>Quantity</th>\n      <th>Price</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Apples</td>\n      <td>10</td>\n      <td>$5</td>\n    </tr>\n    <tr>\n      <td>Bananas</td>\n      <td>20</td>\n      <td>$8</td>\n    </tr>\n    <tr>\n      <td>Cherries</td>\n      <td>15</td>\n      <td>$12</td>\n    </tr>\n    <tr>\n      <td colspan=\"2\">Total</td>\n      <td>$25</td>\n    </tr>\n  </tbody>\n  <tfoot>\n    <tr>\n      <td colspan=\"3\">End of the table</td>\n    </tr>\n  </tfoot>\n</table>",
+                            "output": ""
+                        }
+                    ],
+                    "htmlElements": []
+                },
+                {
+                    "question": "Create a table including your favorite singers or musicians and their songs. Add a caption using the 'caption' tag with the text \"My favourite singers/musicians and songs\". The table should have three columns: first for their names, second for their best song, and third for where they are from. Add a footer row with the text \"This is the end of the table\".",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "",
+                            "html": "<table border=\"1\">\n  <caption>My favourite singers/musicians and songs</caption>\n  <thead>\n    <tr>\n      <th>Name</th>\n      <th>Best Song</th>\n      <th>Country</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Sia</td>\n      <td>Titanium</td>\n      <td>Australia</td>\n    </tr>\n    <tr>\n      <td>Kshmr</td>\n      <td>Jungle whistle</td>\n      <td>USA</td>\n    </tr>\n    <tr>\n      <td>Calvin Harris</td>\n      <td>Slide</td>\n      <td>Scotland</td>\n    </tr>\n  </tbody>\n  <tfoot>\n    <tr>\n      <td colspan=\"3\">This is the end of the table</td>\n    </tr>\n  </tfoot>\n</table>",
+                            "css": ""
+                        }
+                    ]
+                }
+            ],
+            "questions": [
+                "What is the purpose of the 'border' attribute in a table?",
+                "How can you merge multiple cells horizontally or vertically using 'colspan' and 'rowspan'?",
+                "What is the difference between thead, tbody, and tfoot?",
+                "Why is it important to add a caption to a table?"
+            ]
+        },
+        {
+            "step": 13,
+            "name": "Swar",
+            "image": "/images/galaxies/shanti-html/Swar.webp",
+            "tags": [
+                "Forms",
+                "Input elements",
+                "Buttons"
+            ],
+            "description": "Forms are used to collect information from users, such as during login, registration, or surveys. They can include text fields, checkboxes, radio buttons, file uploads, text areas, and more. In this section, you'll learn how to create HTML forms, use different input types, and properly connect labels for better accessibility.",
+            "researchTopics": [
+                "Creating a form using 'form'",
+                "Creating 'input' element",
+                "'type' attribute for input (text, email, password, number, checkbox, radio, file, etc.)",
+                "'readonly', 'disabled', 'multiple', 'placeholder', 'required', 'autocomplete' attributes on 'input'",
+                "'label' element in form and 'for' attribute to link label to input",
+                "'name' and 'value' attributes in input elements",
+                "'textarea' element and its attributes ('rows', 'cols', 'placeholder', 'required')",
+                "'button' elements in HTML (general information)",
+                "Usage of 'button' element inside 'form'",
+                "Type attribute on 'button' ('submit', 'button', 'reset')",
+                "'action' attribute on 'form'"
+            ],
+            "tasks": [
+                {
+                    "question": "In this task, you'll practice your knowledge about HTML forms by creating a simple user registration form. Follow these steps (order adjusted for clarity, and yes, it may look plain; we will style it later):\nCreate a form element with the 'action' attribute pointing to 'https://www.w3schools.com/html/html_forms.asp'. When the form is submitted, the user will be redirected to this website.\nCreate labels and text inputs for Name, Surname, and Username. Use the 'text' type for all. Connect each label to its input using 'for' and 'id'.\nCreate a label and input for Email using 'type=\"email\"'.\nAdd a label and input for Age using 'type=\"number\"'.\nAdd a label and input for Password using 'type=\"password\"' (so the text is hidden as dots).\nAdd a checkbox with a label asking if the user is a student.\nAdd a file input with a label to upload an image. Restrict accepted formats to JPEG ('.jpg,.jpeg').\nAdd radio buttons for Gender (Male and Female), each with its own label.\nAdd a textarea with a label for 'About yourself' and set its rows attribute to 4.\nAdd two buttons: one with 'type=\"reset\"' and another with 'type=\"submit\"'.\nInspect the form using Developer Tools to understand how each element behaves. Yes, it may look a bit plain, but we will style it later. You can use '<br>' to start the label–input group on a new line.",
+                    "codeTasks": [],
+                    "codeExamples": [],
+                    "htmlElements": [
+                        {
+                            "title": "",
+                            "html": "<form action=\"https://www.w3schools.com/html/html_forms.asp\">\n\n  <label for=\"name\">Name:</label>\n  <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Enter your name\" required><br>\n\n  <label for=\"surname\">Surname:</label>\n  <input type=\"text\" id=\"surname\" name=\"surname\" placeholder=\"Enter your surname\" required><br>\n\n  <label for=\"username\">Username:</label>\n  <input type=\"text\" id=\"username\" name=\"username\" placeholder=\"Enter your username\" required><br>\n\n  <label for=\"email\">Email:</label>\n  <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Enter your email\" required><br>\n\n  <label for=\"age\">Age:</label>\n  <input type=\"number\" id=\"age\" name=\"age\" placeholder=\"Enter your age\" required><br>\n\n  <label for=\"password\">Password:</label>\n  <input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter your password\" required><br>\n\n  <label for=\"student\">Are you a student?</label>\n  <input type=\"checkbox\" id=\"student\" name=\"student\"><br>\n\n  <label for=\"profilePic\">Upload Profile Picture:</label>\n  <input type=\"file\" id=\"profilePic\" name=\"profilePic\" accept=\".jpg,.jpeg\"><br>\n\n  <label>Gender:</label>\n  <input type=\"radio\" id=\"male\" name=\"gender\" value=\"male\">\n  <label for=\"male\">Male</label>\n  <input type=\"radio\" id=\"female\" name=\"gender\" value=\"female\">\n  <label for=\"female\">Female</label><br>\n\n  <label for=\"about\">About yourself:</label>\n  <textarea id=\"about\" name=\"about\" rows=\"4\" placeholder=\"Write something about yourself\"></textarea><br>\n\n  <button type=\"reset\">Reset</button>\n  <button type=\"submit\">Submit</button>\n</form>",
+                            "css": ""
+                        }
+                    ]
+                }
+            ],
+            "questions": [
+                "What is the purpose of the 'action' attribute in the 'form' element?",
+                "What is the difference between 'submit', 'button', and 'reset' types on a 'button' element?",
+                "Can 'input', 'textarea', and 'button' elements be used outside a form?",
+                "If you don't specify the type for a 'button' inside a form, what is its default type?",
+                "Can a form contain multiple buttons with type 'submit'?",
+                "Why is it important to connect labels to inputs using 'for' and 'id'?",
+                "What does the 'accept' attribute do for file inputs?",
+                "What are the benefits of using proper input types like 'email', 'number', and 'textarea'?"
+            ]
+        },
+        {
+            "step": 14,
+            "name": "Lavanya",
+            "image": "/images/galaxies/shanti-html/Lavanya.webp",
+            "tags": [
+                "Use of semantic tags"
+            ],
+            "description": "By now, you have learned about the most commonly used HTML tags. Semantic tags provide meaningful structure to your webpage, making it easier for search engines and assistive technologies to understand your content. Using semantic tags improves SEO, accessibility, and overall maintainability of your website.",
+            "researchTopics": [
+                "Understanding semantic tags in HTML and how they improve SEO and accessibility",
+                "Best practices for structuring a webpage using semantic tags",
+                "'header', 'main', 'section', 'aside', 'footer' tags and their proper usage"
+            ],
+            "tasks": [
+                {
+                    "question": "Analyze this HTML structure and identify how semantic tags improve readability, SEO, and accessibility.",
+                    "codeTasks": [],
+                    "codeExamples": [
+                        {
+                            "title": "",
+                            "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Semantic HTML Example</title>\n</head>\n<body>\n\n  <header>\n    <h1>Website Header</h1>\n    <nav>\n      <ul>\n        <li><a href=\"#\">Home</a></li>\n        <li><a href=\"#\">About</a></li>\n        <li><a href=\"#\">Contact</a></li>\n      </ul>\n    </nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>Section 1</h2>\n      <p>This is the first section of the main content.</p>\n    </section>\n\n    <section>\n      <h2>Section 2</h2>\n      <p>This is the second section of the main content.</p>\n    </section>\n\n    <aside>\n      <h3>Sidebar / Related Info</h3>\n      <p>This is some aside content.</p>\n      <nav>\n        <ul>\n          <li><a href=\"#\">Link 1</a></li>\n          <li><a href=\"#\">Link 2</a></li>\n          <li><a href=\"#\">Link 3</a></li>\n        </ul>\n      </nav>\n    </aside>\n  </main>\n\n  <footer>\n    <p>Website Footer &copy; 2025</p>\n  </footer>\n\n</body>\n</html>",
+                            "output": ""
+                        }
+                    ],
+                    "htmlElements": []
+                }
+            ],
+            "questions": [
+                "Why are semantic tags preferred over generic divs and spans for structuring content?",
+                "Can a page work correctly without semantic tags? What might be the drawbacks?"
             ]
         }
     ]
