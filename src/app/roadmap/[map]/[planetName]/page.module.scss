@@ -52,6 +52,15 @@
 
     .taskSection {
         .task {
+            margin-top: 3rem;
+
+            .question {
+                line-height: 1.6;
+                white-space: pre-line;
+                font-family: inherit;
+                margin-left: 2rem;
+            }
+
             .htmlElementsCnr {
                 .htmlElement {
                     .elementBox {
